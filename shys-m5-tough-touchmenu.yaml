@@ -7,7 +7,7 @@ esphome:
   name: ${name}
   name_add_mac_suffix: false
   project:
-    name: smarthomeyourself.m5_tough
+    name: stefanloerwald.m5_tough
     version: "1.0"
     
   platformio_options:
@@ -35,12 +35,12 @@ esphome:
 external_components:
   - source:
       type: git
-      url: https://github.com/SmartHome-yourself/m5-tough-touchmenu-for-esphome
+      url: https://github.com/stefanloerwald/m5-tough-touchmenu-for-esphome
       ref: main
     components: [shys_m5_tough]
  
 dashboard_import:
-  package_import_url: github://SmartHome-yourself/m5-tough-touchmenu-for-esphome/shys-m5-tough-touchmenu.yaml@main
+  package_import_url: github://stefanloerwald/m5-tough-touchmenu-for-esphome/shys-m5-tough-touchmenu.yaml@main
   import_full_config: false
 
 esp32:
@@ -155,4 +155,5 @@ text_sensor:
               - binary_sensor.template.publish:
                   id: display_on
                   state: OFF
+
 
