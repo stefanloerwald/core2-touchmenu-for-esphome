@@ -8,7 +8,7 @@ esphome:
   name_add_mac_suffix: false
   project:
     name: stefanloerwald.m5_tough
-    version: "1.1"
+    version: "1.2"
     
   platformio_options:
     board: esp32dev
@@ -61,8 +61,6 @@ ota:
 wifi:
   ssid: ${wifi_ssid}
   password: ${wifi_password}
-  ap:
-    password: "12345678"
 
 improv_serial:
 
@@ -155,6 +153,7 @@ text_sensor:
               - binary_sensor.template.publish:
                   id: display_on
                   state: OFF
+
 
 
 
