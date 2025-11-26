@@ -43,7 +43,7 @@ empty_text_sensor_ns = cg.esphome_ns.namespace(
 ShysM5Tough = empty_text_sensor_ns.class_(
     'ShysM5Tough', text_sensor.TextSensor, cg.Component)
 
-CONFIG_SCHEMA = text_sensor.TEXT_SENSOR_SCHEMA.extend({
+CONFIG_SCHEMA = text_sensor._TEXT_SENSOR_SCHEMA.extend({
     cv.GenerateID(): cv.declare_id(ShysM5Tough),
     cv.Optional(CONF_NAME, default=DEFAULT_NAME): cv.string,
     cv.Optional(CONF_INIT_SOUND, default=DEFAULT_INIT_SOUND): cv.boolean,
