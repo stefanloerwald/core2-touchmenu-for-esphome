@@ -15,7 +15,7 @@ esphome:
     framework: arduino
 
     lib_deps:
-      - WiFi
+      # - WiFi
       - SPI
       # - FS
       # - Wire
@@ -44,8 +44,8 @@ dashboard_import:
   package_import_url: github://stefanloerwald/core2-touchmenu-for-esphome/shys-m5-tough-touchmenu.yaml@main
   import_full_config: false
 
-esp32:
-  board: esp32dev
+#esp32:
+#  board: esp32dev
 
 logger:
   level: DEBUG
@@ -59,9 +59,9 @@ api:
 ota:
   - platform: esphome
 
-wifi:
-  ssid: ${wifi_ssid}
-  password: ${wifi_password}
+#wifi:
+#  ssid: ${wifi_ssid}
+#  password: ${wifi_password}
 
 improv_serial:
 
@@ -154,6 +154,7 @@ text_sensor:
               - binary_sensor.template.publish:
                   id: display_on
                   state: OFF
+
 
 
 
