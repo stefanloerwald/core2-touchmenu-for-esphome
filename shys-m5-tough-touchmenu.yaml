@@ -20,7 +20,7 @@ esphome:
       # - FS
       # - Wire
       # - EEPROM
-      - m5stack/M5Stack
+      - m5stack/M5Core2
       # - kriddile/SDServer@^1.0.0
 
   on_boot:
@@ -154,6 +154,7 @@ text_sensor:
               - binary_sensor.template.publish:
                   id: display_on
                   state: OFF
+
 
 
 
