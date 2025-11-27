@@ -16,7 +16,7 @@ esphome:
 
     lib_deps:
       # - WiFi
-      # - SPI
+      - SPI
       # - FS
       # - Wire
       # - EEPROM
@@ -154,6 +154,7 @@ text_sensor:
               - binary_sensor.template.publish:
                   id: display_on
                   state: OFF
+
 
 
 
