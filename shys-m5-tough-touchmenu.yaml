@@ -15,11 +15,11 @@ esphome:
     framework: arduino
 
     lib_deps:
-      - WiFi
-      - SPI
-      - FS
-      - Wire
-      - EEPROM
+      # - WiFi
+      # - SPI
+      # - FS
+      # - Wire
+      # - EEPROM
       - m5stack/M5Unified @ 0.2.11
 
   on_boot:
@@ -153,6 +153,7 @@ text_sensor:
               - binary_sensor.template.publish:
                   id: display_on
                   state: OFF
+
 
 
 
