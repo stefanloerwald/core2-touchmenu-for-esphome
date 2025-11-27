@@ -11,8 +11,8 @@ esphome:
     version: "1.3"
     
   platformio_options:
-    board: esp32dev
-    framework: arduino
+    # board: esp32dev
+    # framework: arduino
 
     lib_deps:
       - WiFi
@@ -154,6 +154,7 @@ text_sensor:
               - binary_sensor.template.publish:
                   id: display_on
                   state: OFF
+
 
 
 
