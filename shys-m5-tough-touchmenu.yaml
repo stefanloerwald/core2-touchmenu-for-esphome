@@ -15,7 +15,7 @@ esphome:
     framework: arduino
 
     lib_deps:
-      # - WiFi
+      - WiFi
       - SPI
       # - FS
       # - Wire
@@ -154,6 +154,7 @@ text_sensor:
               - binary_sensor.template.publish:
                   id: display_on
                   state: OFF
+
 
 
 
