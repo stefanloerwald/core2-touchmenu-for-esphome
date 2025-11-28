@@ -8,7 +8,7 @@ esphome:
   name_add_mac_suffix: false
   project:
     name: stefanloerwald.m5_tough
-    version: "1.5"
+    version: "1.6"
     
   platformio_options:
     # board: esp32dev
@@ -154,6 +154,7 @@ text_sensor:
               - binary_sensor.template.publish:
                   id: display_on
                   state: OFF
+
 
 
 
