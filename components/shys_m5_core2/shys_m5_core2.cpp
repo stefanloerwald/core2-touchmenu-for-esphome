@@ -39,7 +39,6 @@ namespace esphome
         {
             ESP_LOGCONFIG(TAG, "-----------------------------------");
             ESP_LOGCONFIG(TAG, "Shys M5 Core2");
-            ESP_LOGCONFIG(TAG, "Password Secure: %s", this->login_enabled ? "on" : "off");
             ESP_LOGCONFIG(TAG, "Initial Sound: %s", this->init_sound_enabled ? "on" : "off");
             ESP_LOGCONFIG(TAG, "-----------------------------------");
         }

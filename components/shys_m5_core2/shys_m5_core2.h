@@ -30,27 +30,19 @@ namespace esphome
     {
     protected:
       bool init_sound_enabled = false;
-      bool login_enabled = true;
-
-      String tmpPwInfo = "";
-
-      String myPasswd = "12345";
       int timeToLock = 20000;
       int timeToScreenOff = 30000;
       int maxVolume = 30;
 
       enum Pages
       {
-        PASSWORD_PAGE,
         BUTTON_PAGE,
         SCREEN_OFF,
         OK,
         FAILURE
       };
 
-      Pages currentPage = PASSWORD_PAGE;
-      boolean loggedIn = false;
-      String pwd_input = "";
+      Pages currentPage = BUTTON_PAGE;
       unsigned long lastTouchEvent = 0;
 
       struct button_t
@@ -142,32 +134,12 @@ namespace esphome
       }
 
       /**
-       * @brief Dienste registrieren
-       *
-       */
-      void registerServices()
-      {
-        register_service(&ShysM5Core2::showCurrentPassword, "showCurrentPassword");
-        register_service(&ShysM5Core2::savePassword, "setNewPassword", {"new_password"});
-      }
-
-      /**
        * @brief
        *
        */
       void set_init_sound_enabled(bool initSound)
       {
         init_sound_enabled = initSound;
-      }
-
-      /**
-       * @brief Set the login enabled object
-       *
-       * @param secured
-       */
-      void set_login_enabled(bool secured)
-      {
-        login_enabled = secured;
       }
 
       /**
@@ -299,13 +271,11 @@ namespace esphome
       void initializeShysM5Core2()
       {
         initM5Display();
-        loadPassword();
 
         registerServices();
 
         initSpeaker();
 
-        createKeypad();
         createOkBtn();
         createFailureBtn();
 
@@ -316,7 +286,7 @@ namespace esphome
           playInitSound();
         }
 
-        setCurrentPage(login_enabled ? PASSWORD_PAGE : BUTTON_PAGE);
+        setCurrentPage(BUTTON_PAGE);
         refreshScreen();
       }
 
@@ -342,10 +312,6 @@ namespace esphome
       {
         switch (currentPage)
         {
-        case PASSWORD_PAGE:
-          showPwdInput();
-          showKeypad();
-          break;
         case BUTTON_PAGE:
           showButtonMenu();
           break;
@@ -373,28 +339,6 @@ namespace esphome
       {
         M5.Display.setTextSize(3);
         drawButtons(buttons[BUTTON_PAGE], buttonAnzahl[BUTTON_PAGE]);
-      }
-
-      /**
-       * Passwort Eingabe über Keypad anzeigen
-       */
-      void showPwdInput()
-      {
-        M5.Display.setTextSize(3);
-        M5.Display.startWrite();
-        M5.Display.setTextColor(TFT_WHITE, TFT_BLACK);
-        M5.Display.setCursor(40, 5);
-        M5.Display.print(pwd_input);
-        M5.Display.endWrite();
-      }
-
-      /**
-       * Numpad anzeigen
-       */
-      void showKeypad()
-      {
-        M5.Display.setTextSize(3);
-        drawButtons(buttons[PASSWORD_PAGE], 12);
       }
 
       /**
@@ -464,7 +408,7 @@ namespace esphome
         if (currentPage == SCREEN_OFF)
         {
           publish_state("Display on");
-          setCurrentPage(login_enabled ? PASSWORD_PAGE : BUTTON_PAGE);
+          setCurrentPage(BUTTON_PAGE);
           pwd_input = "";
           esphome::delay(500);
           return;
@@ -480,9 +424,6 @@ namespace esphome
 
             switch (currentPage)
             {
-            case PASSWORD_PAGE:
-              handlePasswordTouchInput(currentButton);
-              break;
             case BUTTON_PAGE:
               handleButtonTouchInput(currentButton);
               break;
@@ -496,29 +437,6 @@ namespace esphome
               break;
             }
           }
-        }
-      }
-
-      /**
-       * @brief Touch-Eingabe bei der Passworteingabe
-       *
-       */
-      void handlePasswordTouchInput(button_t button)
-      {
-        if (isDigit(button.text.charAt(0)) && pwd_input.length() < 8)
-        {
-          pwd_input = pwd_input + button.text;
-        }
-
-        if (button.text == "X")
-        {
-          pwd_input = "";
-          M5.Display.fillRect(0, 0, 240, 39, TFT_BLACK);
-        }
-
-        if (button.text == "OK")
-        {
-          validatePwd();
         }
       }
 
@@ -566,16 +484,6 @@ namespace esphome
       void displayOff()
       {
         setCurrentPage(SCREEN_OFF);
-      }
-
-      /**
-       * @brief Abmelden
-       *
-       */
-      void logout()
-      {
-        loggedIn = false;
-        setCurrentPage(PASSWORD_PAGE);
       }
 
       /**
@@ -652,100 +560,6 @@ namespace esphome
       }
 
       /**
-       * Tasten-Objekte für Numpad erzeugen
-       */
-      void createKeypad()
-      {
-        buttonAnzahl[PASSWORD_PAGE] = 12;
-
-        buttons[PASSWORD_PAGE][0].x = 20;
-        buttons[PASSWORD_PAGE][0].y = 40;
-        buttons[PASSWORD_PAGE][0].w = 60;
-        buttons[PASSWORD_PAGE][0].h = 60;
-        buttons[PASSWORD_PAGE][0].text = "1";
-        buttons[PASSWORD_PAGE][0].fontsize = 3;
-
-        buttons[PASSWORD_PAGE][1].x = 90;
-        buttons[PASSWORD_PAGE][1].y = 40;
-        buttons[PASSWORD_PAGE][1].w = 60;
-        buttons[PASSWORD_PAGE][1].h = 60;
-        buttons[PASSWORD_PAGE][1].text = "2";
-        buttons[PASSWORD_PAGE][1].fontsize = 3;
-
-        buttons[PASSWORD_PAGE][2].x = 160;
-        buttons[PASSWORD_PAGE][2].y = 40;
-        buttons[PASSWORD_PAGE][2].w = 60;
-        buttons[PASSWORD_PAGE][2].h = 60;
-        buttons[PASSWORD_PAGE][2].text = "3";
-        buttons[PASSWORD_PAGE][2].fontsize = 3;
-        // ---------------------
-        buttons[PASSWORD_PAGE][3].x = 20;
-        buttons[PASSWORD_PAGE][3].y = 110;
-        buttons[PASSWORD_PAGE][3].w = 60;
-        buttons[PASSWORD_PAGE][3].h = 60;
-        buttons[PASSWORD_PAGE][3].text = "4";
-        buttons[PASSWORD_PAGE][3].fontsize = 3;
-
-        buttons[PASSWORD_PAGE][4].x = 90;
-        buttons[PASSWORD_PAGE][4].y = 110;
-        buttons[PASSWORD_PAGE][4].w = 60;
-        buttons[PASSWORD_PAGE][4].h = 60;
-        buttons[PASSWORD_PAGE][4].text = "5";
-        buttons[PASSWORD_PAGE][4].fontsize = 3;
-
-        buttons[PASSWORD_PAGE][5].x = 160;
-        buttons[PASSWORD_PAGE][5].y = 110;
-        buttons[PASSWORD_PAGE][5].w = 60;
-        buttons[PASSWORD_PAGE][5].h = 60;
-        buttons[PASSWORD_PAGE][5].text = "6";
-        buttons[PASSWORD_PAGE][5].fontsize = 3;
-        // ---------------------
-        buttons[PASSWORD_PAGE][6].x = 20;
-        buttons[PASSWORD_PAGE][6].y = 180;
-        buttons[PASSWORD_PAGE][6].w = 60;
-        buttons[PASSWORD_PAGE][6].h = 60;
-        buttons[PASSWORD_PAGE][6].text = "7";
-        buttons[PASSWORD_PAGE][6].fontsize = 3;
-
-        buttons[PASSWORD_PAGE][7].x = 90;
-        buttons[PASSWORD_PAGE][7].y = 180;
-        buttons[PASSWORD_PAGE][7].w = 60;
-        buttons[PASSWORD_PAGE][7].h = 60;
-        buttons[PASSWORD_PAGE][7].text = "8";
-        buttons[PASSWORD_PAGE][7].fontsize = 3;
-
-        buttons[PASSWORD_PAGE][8].x = 160;
-        buttons[PASSWORD_PAGE][8].y = 180;
-        buttons[PASSWORD_PAGE][8].w = 60;
-        buttons[PASSWORD_PAGE][8].h = 60;
-        buttons[PASSWORD_PAGE][8].text = "9";
-        buttons[PASSWORD_PAGE][8].fontsize = 3;
-        // ---------------------
-        buttons[PASSWORD_PAGE][9].x = 20;
-        buttons[PASSWORD_PAGE][9].y = 260;
-        buttons[PASSWORD_PAGE][9].w = 60;
-        buttons[PASSWORD_PAGE][9].h = 60;
-        buttons[PASSWORD_PAGE][9].text = "X";
-        buttons[PASSWORD_PAGE][9].bg_color = TFT_RED;
-        buttons[PASSWORD_PAGE][9].fontsize = 3;
-
-        buttons[PASSWORD_PAGE][10].x = 90;
-        buttons[PASSWORD_PAGE][10].y = 260;
-        buttons[PASSWORD_PAGE][10].w = 60;
-        buttons[PASSWORD_PAGE][10].h = 60;
-        buttons[PASSWORD_PAGE][10].text = "0";
-        buttons[PASSWORD_PAGE][10].fontsize = 3;
-
-        buttons[PASSWORD_PAGE][11].x = 160;
-        buttons[PASSWORD_PAGE][11].y = 260;
-        buttons[PASSWORD_PAGE][11].w = 60;
-        buttons[PASSWORD_PAGE][11].h = 60;
-        buttons[PASSWORD_PAGE][11].text = "OK";
-        buttons[PASSWORD_PAGE][11].bg_color = TFT_GREEN;
-        buttons[PASSWORD_PAGE][11].fontsize = 3;
-      }
-
-      /**
        * @brief Create a Ok Btn object
        *
        */
@@ -781,124 +595,6 @@ namespace esphome
         buttons[FAILURE][0].color = TFT_RED;
         buttons[FAILURE][0].text = "X";
         buttons[FAILURE][0].fontsize = 8;
-      }
-
-      /**
-       * @brief Password aus EEPROM lesen
-       *
-       * @return String
-       */
-      String getPassword()
-      {
-        return readStringFromEEPROM(0);
-      }
-
-      /**
-       * @brief Password in EEPROM schreiben
-       *
-       * @param newPw
-       */
-      void savePassword(std::string newPw)
-      {
-        myPasswd = String(newPw.c_str());
-
-        writeStringToEEPROM(0, myPasswd);
-
-        ESP_LOGI("current_password", "Neues Passwort wurde gespeichert: '%s'", newPw.c_str());
-      }
-
-      /**
-       * @brief Aktuelles Passwort im Log ausgeben
-       *
-       */
-      void showCurrentPassword()
-      {
-        loadPassword();
-        ESP_LOGI("current_password", "Aktuelles Passwort lautet: '%s'", myPasswd.c_str());
-      }
-
-      /**
-       * @brief Passwort aus EEPROM laden falls vorhanden
-       *
-       */
-      void loadPassword()
-      {
-        String tmpPw = getPassword();
-        if (tmpPw != NULL && !tmpPw.isEmpty())
-        {
-          myPasswd = tmpPw;
-          ESP_LOGI("current_password", "Aktuelles Passwort aus EEPROM: '%s'", myPasswd.c_str());
-        } else {
-          ESP_LOGI("current_password", "Aktuelles Passwort (kein gespeichertes Passwd gefunden): '%s'", myPasswd.c_str());
-        }
-      }
-
-      /**
-       * Passworteingabe prüfen
-       */
-      void validatePwd()
-      {
-        M5.Display.fillRect(0, 0, 240, 39, TFT_BLACK);
-
-        if (pwd_input.equals(myPasswd))
-        {
-          loggedIn = true;
-          publish_state("Login OK");
-          pwd_input = "";
-          setCurrentPage(OK);
-          esphome::delay(1000);
-          setCurrentPage(BUTTON_PAGE);
-        }
-        else
-        {
-          publish_state("Login failed");
-          pwd_input = "";
-          setCurrentPage(FAILURE);
-          esphome::delay(1000);
-          setCurrentPage(PASSWORD_PAGE);
-        }
-      }
-
-      /**
-       * Text in EEProm ablegen
-       */
-      void writeStringToEEPROM(int addrOffset, const String &strToWrite)
-      {
-        EEPROM.begin(EEPROM_SIZE);
-
-        byte len = strToWrite.length();
-        EEPROM.write(addrOffset, len);
-        for (int i = 0; i < len; i++)
-        {
-          EEPROM.write(addrOffset + 1 + i, strToWrite[i]);
-        }
-        EEPROM.commit();
-        EEPROM.end();
-      }
-
-      /**
-       * Text aus EEProm auslesen
-       */
-      String readStringFromEEPROM(int addrOffset)
-      {
-        String retVal = "";
-
-        EEPROM.begin(EEPROM_SIZE);
-
-        int newStrLen = EEPROM.read(addrOffset);
-        if(!isnan(newStrLen)){
-          char data[newStrLen + 1];
-          for (int i = 0; i < newStrLen; i++)
-          {
-            data[i] = EEPROM.read(addrOffset + 1 + i);
-          }
-          data[newStrLen] = '\0';
-          
-          EEPROM.end();
-          retVal = String(data);
-        }
-        
-        return retVal;
       }
 
       void refreshScreen()
