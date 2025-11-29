@@ -17,7 +17,6 @@ VALUE_BUTTON_TYPES = {
 
 # PARAMETER
 CONF_INIT_SOUND = "init_sound"
-CONF_LOGIN_ENABLED = "login_enabled"
 CONF_BUTTONS = "buttons"
 CONF_BUTTON_X = "x"
 CONF_BUTTON_Y = "y"
@@ -33,7 +32,6 @@ CONF_BUTTON_BG_COLOR = "bgcolor"
 # DEFAULTS
 DEFAULT_NAME = "M5 Stack Core2"
 DEFAULT_INIT_SOUND = False
-DEFAULT_LOGIN_ENABLED = True
 DEFAULT_BUTTON_COLOR = "TFT_BLUE"
 DEFAULT_BUTTON_TEXT_COLOR = "TFT_WHITE"
 DEFAULT_BUTTON_BG_COLOR = "TFT_DARKGREY"
@@ -47,7 +45,6 @@ CONFIG_SCHEMA = text_sensor._TEXT_SENSOR_SCHEMA.extend({
     cv.GenerateID(): cv.declare_id(ShysM5Core2),
     cv.Optional(CONF_NAME, default=DEFAULT_NAME): cv.string,
     cv.Optional(CONF_INIT_SOUND, default=DEFAULT_INIT_SOUND): cv.boolean,
-    cv.Optional(CONF_LOGIN_ENABLED, default=DEFAULT_LOGIN_ENABLED): cv.boolean,
     cv.Optional(CONF_BUTTONS, default=[]): cv.All([dict({
         cv.Required(CONF_BUTTON_X): cv.int_range(0, 240),
         cv.Required(CONF_BUTTON_Y): cv.int_range(0, 320),
@@ -75,10 +72,6 @@ def to_code(config):
     if CONF_INIT_SOUND in config:
         confInitSound = config[CONF_INIT_SOUND]
         cg.add(var.set_init_sound_enabled(confInitSound))
-
-    if CONF_LOGIN_ENABLED in config:
-        confSecured = config[CONF_LOGIN_ENABLED]
-        cg.add(var.set_login_enabled(confSecured))
 
     if CONF_BUTTONS in config:
         confButtons = config[CONF_BUTTONS]

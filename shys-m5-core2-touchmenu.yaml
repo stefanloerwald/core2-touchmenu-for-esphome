@@ -23,13 +23,6 @@ esphome:
 
   on_boot:
     priority: 0
-    then:
-      - binary_sensor.template.publish:
-          id: logged_in
-          state: off
-      - sensor.template.publish:
-          id: failed_logins
-          state: 0
           
 external_components:
   - source:
