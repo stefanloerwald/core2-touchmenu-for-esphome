@@ -31,7 +31,7 @@ CONF_BUTTON_BG_COLOR = "bgcolor"
 
 
 # DEFAULTS
-DEFAULT_NAME = "M5 Stack Tough"
+DEFAULT_NAME = "M5 Stack Core2"
 DEFAULT_INIT_SOUND = False
 DEFAULT_LOGIN_ENABLED = True
 DEFAULT_BUTTON_COLOR = "TFT_BLUE"
@@ -39,12 +39,12 @@ DEFAULT_BUTTON_TEXT_COLOR = "TFT_WHITE"
 DEFAULT_BUTTON_BG_COLOR = "TFT_DARKGREY"
 
 empty_text_sensor_ns = cg.esphome_ns.namespace(
-    'shys_m5_tough')
-ShysM5Tough = empty_text_sensor_ns.class_(
-    'ShysM5Tough', text_sensor.TextSensor, cg.Component)
+    'shys_m5_core2')
+ShysM5Core2 = empty_text_sensor_ns.class_(
+    'ShysM5Core2', text_sensor.TextSensor, cg.Component)
 
 CONFIG_SCHEMA = text_sensor._TEXT_SENSOR_SCHEMA.extend({
-    cv.GenerateID(): cv.declare_id(ShysM5Tough),
+    cv.GenerateID(): cv.declare_id(ShysM5Core2),
     cv.Optional(CONF_NAME, default=DEFAULT_NAME): cv.string,
     cv.Optional(CONF_INIT_SOUND, default=DEFAULT_INIT_SOUND): cv.boolean,
     cv.Optional(CONF_LOGIN_ENABLED, default=DEFAULT_LOGIN_ENABLED): cv.boolean,
