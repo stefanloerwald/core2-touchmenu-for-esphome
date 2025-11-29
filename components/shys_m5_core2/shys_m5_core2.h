@@ -58,7 +58,7 @@ namespace esphome
         int w = -1;
         int h = -1;
         int fontsize = -1;
-        std::string text;
+        StringRef text;
 
         void clear(void)
         {
@@ -152,7 +152,7 @@ namespace esphome
        * @param text
        * @param fontsize
        */
-      void createButton(int x, int y, int width, int height, std::string text, int fontsize, std::string color, std::string textcolor, std::string bgcolor)
+      void createButton(int x, int y, int width, int height, StringRef text, int fontsize, StringRef color, StringRef textcolor, StringRef bgcolor)
       {
         updateButton(buttonAnzahl[BUTTON_PAGE], x, y, width, height, text, fontsize, color, textcolor, bgcolor);
         buttonAnzahl[BUTTON_PAGE] = buttonAnzahl[BUTTON_PAGE] + 1;
@@ -169,7 +169,7 @@ namespace esphome
        * @param text
        * @param fontsize
        */
-      void updateButton(int index, int x, int y, int width, int height, std::string text, int fontsize, std::string color, std::string textcolor, std::string bgcolor)
+      void updateButton(int index, int x, int y, int width, int height, StringRef text, int fontsize, StringRef color, StringRef textcolor, StringRef bgcolor)
       {
         buttons[BUTTON_PAGE][index].x = x;
         buttons[BUTTON_PAGE][index].y = y;
