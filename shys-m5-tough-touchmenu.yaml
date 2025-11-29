@@ -38,7 +38,7 @@ external_components:
       type: git
       url: https://github.com/stefanloerwald/core2-touchmenu-for-esphome
       ref: main
-    components: [shys_m5_tough]
+    components: [shys_m5_core2]
  
 dashboard_import:
   package_import_url: github://stefanloerwald/core2-touchmenu-for-esphome/shys-m5-tough-touchmenu.yaml@main
@@ -154,6 +154,7 @@ text_sensor:
               - binary_sensor.template.publish:
                   id: display_on
                   state: OFF
+
 
 
 
