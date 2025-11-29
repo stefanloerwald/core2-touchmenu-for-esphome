@@ -1,13 +1,13 @@
 substitutions:
-  name: "m5-tough"
-  friendly_name: "M5 Tough"
-  m5_textsensor_id: "m5_textsensor_id"   # zum reinreichen des shys_m5_tough-Textsensors
+  name: "m5-core2"
+  friendly_name: "M5 Core2"
+  m5_textsensor_id: "m5_textsensor_id"   # zum reinreichen des shys_m5_core2-Textsensors
   
 esphome:
   name: ${name}
   name_add_mac_suffix: false
   project:
-    name: stefanloerwald.m5_tough
+    name: stefanloerwald.m5_core2
     version: "1.7"
     
   platformio_options:
@@ -41,7 +41,7 @@ external_components:
     components: [shys_m5_core2]
  
 dashboard_import:
-  package_import_url: github://stefanloerwald/core2-touchmenu-for-esphome/shys-m5-tough-touchmenu.yaml@main
+  package_import_url: github://stefanloerwald/core2-touchmenu-for-esphome/shys-m5-core2-touchmenu.yaml@main
   import_full_config: false
 
 #esp32:
@@ -154,6 +154,7 @@ text_sensor:
               - binary_sensor.template.publish:
                   id: display_on
                   state: OFF
+
 
 
 
