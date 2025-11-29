@@ -35,9 +35,8 @@ esphome:
           
 external_components:
   - source:
-      type: git
-      url: https://github.com/stefanloerwald/core2-touchmenu-for-esphome
-      ref: main
+      type: local
+      path: components
     components:
       - shys_m5_core2
  
@@ -155,6 +154,7 @@ text_sensor:
               - binary_sensor.template.publish:
                   id: display_on
                   state: OFF
+
 
 
 
