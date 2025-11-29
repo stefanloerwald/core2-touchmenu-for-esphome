@@ -10,7 +10,7 @@ esphome:
     name: stefanloerwald.m5_core2
     version: "1.7"
   platformio_options:
-    # board: esp32dev
+    board: m5stack-core2
     # framework: arduino
 
     lib_deps:
@@ -60,14 +60,6 @@ api:
 
 ota:
   - platform: esphome
-
-#wifi:
-#  ssid: ${wifi_ssid}
-#  password: ${wifi_password}
-
-improv_serial:
-
-captive_portal:
 
 binary_sensor:
   - platform: template
