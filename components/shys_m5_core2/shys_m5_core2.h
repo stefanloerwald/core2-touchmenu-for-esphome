@@ -7,7 +7,7 @@
 #undef delayMicroseconds
 #undef delay
 
-#include <M5Core2.h>
+#include "M5Core2.h"
 
 #include "EEPROM.h"
 
