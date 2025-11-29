@@ -15,12 +15,12 @@ esphome:
     # framework: arduino
 
     lib_deps:
+      - m5stack/M5Core2
       - WiFi
       # - SPI
       # - FS
       # - Wire
       # - EEPROM
-      - m5stack/M5Core2
       # - kriddile/SDServer@^1.0.0
 
   on_boot:
