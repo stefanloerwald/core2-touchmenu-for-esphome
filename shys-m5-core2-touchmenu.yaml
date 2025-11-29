@@ -20,9 +20,6 @@ esphome:
       # - FS
       # - Wire
       # - kriddile/SDServer@^1.0.0
-
-  on_boot:
-    priority: 0
           
 external_components:
   - source:
