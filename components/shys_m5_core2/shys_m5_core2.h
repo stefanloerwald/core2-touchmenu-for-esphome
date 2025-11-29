@@ -272,8 +272,6 @@ namespace esphome
       {
         initM5Display();
 
-        registerServices();
-
         initSpeaker();
 
         createOkBtn();
@@ -327,7 +325,7 @@ namespace esphome
         case SCREEN_OFF:
           M5.Display.fillRect(0, 0, 240, 320, TFT_BLACK);
         default:
-          showPwdInput();
+        break;
         }
       }
 
@@ -409,7 +407,6 @@ namespace esphome
         {
           publish_state("Display on");
           setCurrentPage(BUTTON_PAGE);
-          pwd_input = "";
           esphome::delay(500);
           return;
         }
