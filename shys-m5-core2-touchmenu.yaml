@@ -9,7 +9,6 @@ esphome:
   project:
     name: stefanloerwald.m5_core2
     version: "1.7"
-    
   platformio_options:
     # board: esp32dev
     # framework: arduino
@@ -46,8 +45,9 @@ dashboard_import:
   package_import_url: github://stefanloerwald/core2-touchmenu-for-esphome/shys-m5-core2-touchmenu.yaml@main
   import_full_config: false
 
-#esp32:
-#  board: esp32dev
+
+ esp32:
+    board: m5stack-core2
 
 logger:
   level: DEBUG
