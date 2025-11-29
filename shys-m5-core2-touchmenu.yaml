@@ -15,10 +15,10 @@ esphome:
     lib_deps:
       - m5stack/M5Unified
       - WiFi
+      - EEPROM
       # - SPI
       # - FS
       # - Wire
-      # - EEPROM
       # - kriddile/SDServer@^1.0.0
 
   on_boot:
