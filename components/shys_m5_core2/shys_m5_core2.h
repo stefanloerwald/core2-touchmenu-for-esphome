@@ -178,9 +178,9 @@ namespace esphome
         buttons[BUTTON_PAGE][index].h = height;
         buttons[BUTTON_PAGE][index].text = text;
         buttons[BUTTON_PAGE][index].fontsize = fontsize;
-        buttons[BUTTON_PAGE][buttonAnzahl[BUTTON_PAGE]].color = getColor(color.c_str());
-        buttons[BUTTON_PAGE][buttonAnzahl[BUTTON_PAGE]].text_color = getColor(textcolor.c_str());
-        buttons[BUTTON_PAGE][buttonAnzahl[BUTTON_PAGE]].bg_color = getColor(bgcolor.c_str());
+        buttons[BUTTON_PAGE][buttonAnzahl[BUTTON_PAGE]].color = getColor(color);
+        buttons[BUTTON_PAGE][buttonAnzahl[BUTTON_PAGE]].text_color = getColor(textcolor);
+        buttons[BUTTON_PAGE][buttonAnzahl[BUTTON_PAGE]].bg_color = getColor(bgcolor);
       }
 
       int getColor(const char *colorname)
