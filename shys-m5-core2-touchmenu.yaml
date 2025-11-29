@@ -39,6 +39,7 @@ esp32:
   board: m5stack-core2
   framework:
     type: esp-idf
+  platform: espressif32
 
 logger:
   level: DEBUG
