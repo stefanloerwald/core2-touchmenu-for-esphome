@@ -1,5 +1,5 @@
 #include "esphome/core/log.h"
-#include "shys_m5_tough.h"
+#include "shys_m5_core2.h"
 
 namespace esphome
 {
