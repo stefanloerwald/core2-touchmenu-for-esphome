@@ -23,10 +23,10 @@
 
 namespace esphome
 {
-  namespace shys_m5_tough
+  namespace shys_m5_core2
   {
 
-    class ShysM5Tough : public text_sensor::TextSensor, public Component, public esphome::api::CustomAPIDevice
+    class ShysM5Core2 : public text_sensor::TextSensor, public Component, public esphome::api::CustomAPIDevice
     {
     protected:
       bool init_sound_enabled = false;
@@ -118,7 +118,7 @@ namespace esphome
       void setup() override;
       void loop() override;
 
-      ShysM5Tough() : Component() {}
+      ShysM5Core2() : Component() {}
 
       /**
        * @brief
@@ -147,8 +147,8 @@ namespace esphome
        */
       void registerServices()
       {
-        register_service(&ShysM5Tough::showCurrentPassword, "showCurrentPassword");
-        register_service(&ShysM5Tough::savePassword, "setNewPassword", {"new_password"});
+        register_service(&ShysM5Core2::showCurrentPassword, "showCurrentPassword");
+        register_service(&ShysM5Core2::savePassword, "setNewPassword", {"new_password"});
       }
 
       /**
@@ -296,7 +296,7 @@ namespace esphome
        * @brief
        *
        */
-      void initializeShysM5Tough()
+      void initializeShysM5Core2()
       {
         initM5Display();
         loadPassword();
