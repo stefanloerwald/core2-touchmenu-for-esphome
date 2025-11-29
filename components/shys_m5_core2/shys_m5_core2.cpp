@@ -3,19 +3,19 @@
 
 namespace esphome
 {
-    namespace shys_m5_tough
+    namespace shys_m5_core2
     {
 
-        static const char *TAG = "shys_m5_tough";
+        static const char *TAG = "shys_m5_core2";
 
         /**
          * @brief SETUP
          *
          * Initialisierung
          */
-        void ShysM5Tough::setup()
+        void ShysM5Core2::setup()
         {
-            ShysM5Tough::initializeShysM5Tough();
+            ShysM5Core2::initializeShysM5Core2();
             ESP_LOGI("log", "%s", "M5 is initialized");
         }
 
@@ -24,9 +24,9 @@ namespace esphome
          *
          * Standard Loop
          */
-        void ShysM5Tough::loop()
+        void ShysM5Core2::loop()
         {
-            ShysM5Tough::handleTouch();
+            ShysM5Core2::handleTouch();
             esphome::delay(5);
         }
 
@@ -35,10 +35,10 @@ namespace esphome
          *
          * Ausgabe der aktuellen Konfiguration im Log nach Initialisierung
          */
-        void ShysM5Tough::dump_config()
+        void ShysM5Core2::dump_config()
         {
             ESP_LOGCONFIG(TAG, "-----------------------------------");
-            ESP_LOGCONFIG(TAG, "Shys M5 Tough");
+            ESP_LOGCONFIG(TAG, "Shys M5 Core2");
             ESP_LOGCONFIG(TAG, "Password Secure: %s", this->login_enabled ? "on" : "off");
             ESP_LOGCONFIG(TAG, "Initial Sound: %s", this->init_sound_enabled ? "on" : "off");
             ESP_LOGCONFIG(TAG, "-----------------------------------");
