@@ -417,7 +417,7 @@ namespace esphome
           button_t currentButton = buttons[currentPage][i];
           if (currentButton.contain(x, y))
           {
-            ESP_LOGI("log", "Button %s pressed", currentButton.text.c_str());
+            ESP_LOGI("log", "Button %s pressed", currentButton.text);
             playTouchBeep();
 
             switch (currentPage)
@@ -446,7 +446,7 @@ namespace esphome
       {
         char message[1000];
         strcpy(message, "Button: ");
-        strcat(message, button.text.c_str());
+        strcat(message, button.text);
         publish_state(message);
         setCurrentPage(OK);
         esphome::delay(1000);
