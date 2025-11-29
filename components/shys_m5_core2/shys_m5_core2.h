@@ -383,7 +383,7 @@ namespace esphome
       void checkForTouch(int count)
       {
         lastTouchEvent = esphome::millis();
-        boolean repaint = false;
+        bool repaint = false;
 
         static m5::touch_state_t prev_state;
         for (int i = 0; i < count; ++i)
@@ -457,20 +457,11 @@ namespace esphome
        */
       void validateTouchTimeout()
       {
-        if (!loggedIn || !login_enabled)
+        if (currentPage != SCREEN_OFF && esphome::millis() - lastTouchEvent > timeToScreenOff)
         {
-          if (currentPage != SCREEN_OFF && esphome::millis() - lastTouchEvent > timeToScreenOff)
-          {
-            displayOff();
-            ESP_LOGI("sleep", "Sleep after %d ms", timeToScreenOff);
-            publish_state("Display off");
-          }
-        }
-        else if (esphome::millis() - lastTouchEvent > timeToLock && login_enabled)
-        {
-          logout();
-          ESP_LOGI("autolock", "No action for %d ms", timeToLock);
-          publish_state("Screen locked");
+          displayOff();
+          ESP_LOGI("sleep", "Sleep after %d ms", timeToScreenOff);
+          publish_state("Display off");
         }
       }
 
