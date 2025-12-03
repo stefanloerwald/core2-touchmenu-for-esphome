@@ -14,7 +14,7 @@ esphome:
 
     lib_deps:
       - m5stack/M5Unified
-      - m5stack/M5Core2
+      - m5stack/M5GFX@^0.2.17
       - WiFi
       # - EEPROM
       # - SPI
